@@ -29,12 +29,10 @@ class Solution {
                     break;
                 }
                 level = new ArrayList<>();
-                System.out.println();
                 queue.add(null);
             }
             TreeNode current = queue.poll();
             level.add(current.val);
-            System.out.print(current.val + " ");
             if(current.left != null) queue.add(current.left);
             if(current.right != null) queue.add(current.right);
         }
