@@ -20,10 +20,22 @@ class Solution {
         return inorder;
     }
     
-    private void inorder(TreeNode root, List<Integer> inorder){
+    /*private void inorder(TreeNode root, List<Integer> inorder){
         if(root == null) return;
         inorder.add(root.val);
         inorder(root.left, inorder);
         inorder(root.right, inorder);
+    }*/
+    
+    private void inorder(TreeNode root, List<Integer> inorder){
+        if(root == null) return;
+        Stack<TreeNode> stack = new Stack<>();
+        stack.push(root);
+        while(!stack.isEmpty()){
+            TreeNode current = stack.pop();
+            inorder.add(current.val);
+            if(current.right != null) stack.push(current.right);
+            if(current.left != null) stack.push(current.left);
+        }
     }
 }
