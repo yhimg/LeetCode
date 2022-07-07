@@ -16,7 +16,7 @@
 class Solution {
     public List<Integer> inorderTraversal(TreeNode root) {
         List<Integer> inOrderData = new ArrayList<>();
-        //if(root == null) return inOrderData;
+        if(root == null) return inOrderData;
         inOrder(root, inOrderData);
         return inOrderData;
     }
