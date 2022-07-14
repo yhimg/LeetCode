@@ -15,7 +15,7 @@
  */
 class Solution {
     public boolean isSymmetric(TreeNode root) {
-        if(root == null) return true;
+        /*if(root == null) return true;
         Queue<TreeNode> leftQ = new LinkedList();
         Queue<TreeNode> rightQ = new LinkedList();
         if(root.left != null) leftQ.add(root.left);
@@ -36,6 +36,24 @@ class Solution {
             if(leftQ.size() != rightQ.size()) break;;
         }
         if(leftQ.size() != rightQ.size()) return false;
+        return true;*/
+        
+        if(root == null) return true;
+        Queue<TreeNode> q = new LinkedList();
+        q.add(root.left);
+        q.add(root.right);
+        while(!q.isEmpty()){
+            TreeNode left = q.remove();
+            TreeNode right = q.remove();
+            if(left == null && right == null) continue;
+            if(left == null || right == null || left.val != right.val) return false;
+            
+            q.add(left.left);
+            q.add(right.right);
+            q.add(left.right);
+            q.add(right.left);
+            
+        }
         return true;
         
     }
