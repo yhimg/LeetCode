@@ -19,12 +19,13 @@ class Solution {
         List<Integer> l2 = new ArrayList();
         leafNodes(root1, l1);
         leafNodes(root2, l2);
-        if(l1.size() == l2.size()){
+        if(l1.equals(l2)) return true;
+        /*if(l1.size() == l2.size()){
             for(int i=0; i< l1.size(); i++){
                 if(l1.get(i) != l2.get(i)) return false;
             }
             return true;
-        }
+        }*/
         return false;
     }
     
