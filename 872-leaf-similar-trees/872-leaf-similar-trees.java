@@ -19,15 +19,6 @@ class Solution {
         List<Integer> l2 = new ArrayList();
         leafNodes(root1, l1);
         leafNodes(root2, l2);
-        System.out.println("L1:");
-        for(int x : l1){
-            System.out.println(x);
-        }
-        
-        System.out.println("L2:");
-        for(int x : l2){
-            System.out.println(x);
-        }
         if(l1.size() == l2.size()){
             for(int i=0; i< l1.size(); i++){
                 if(l1.get(i) != l2.get(i)) return false;
