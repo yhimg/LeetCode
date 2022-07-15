@@ -16,7 +16,7 @@
 class Solution {
     private boolean result = true;
     public boolean isBalanced(TreeNode root) {
-        System.out.println(check(root));
+        check(root);
         return result;
     }
      private int check(TreeNode root){
