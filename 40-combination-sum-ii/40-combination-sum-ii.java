@@ -8,10 +8,12 @@ class Solution {
 
     private void subSeq(int index, int[] arr, int target, List<Integer> mid, List<List<Integer>> result){
         
-       if(target == 0){
+        if(target == 0){
           result.add(new ArrayList(mid)); 
-           return;
+          return;
          }
+        
+       
         
         for(int i = index; i< arr.length; i++){
             if(i > index && arr[i] == arr[i-1]) continue;
