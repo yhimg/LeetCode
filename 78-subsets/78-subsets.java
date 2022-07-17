@@ -7,7 +7,18 @@ class Solution {
     
     private void subSeq(int index, int[] arr, List<List<Integer>> result, List<Integer> mid){
         
-        if(index == arr.length){
+        if(index > arr.length) return;
+        result.add(new ArrayList(mid));
+        
+        for(int i=index; i<arr.length; i++){
+            mid.add(arr[i]);
+            subSeq(i+1, arr, result, mid);
+            mid.remove(mid.size()-1);
+        }
+        
+        
+        
+        /*if(index == arr.length){
             result.add(new ArrayList(mid));
             return;
         }
@@ -15,6 +26,7 @@ class Solution {
         mid.add(arr[index]);
         subSeq(index+1, arr, result, mid);
         mid.remove(mid.size()-1);
-        subSeq(index+1, arr, result, mid);
+        subSeq(index+1, arr, result, mid);*/
+        
     }
 }
