@@ -17,8 +17,6 @@ class Solution {
     
     private void subSeq(int idx, int[] arr, List<List<Integer>> result, List<Integer> mid){
         
-        mid.stream().forEach(System.out::print);
-        System.out.println();
         result.add(new ArrayList(mid));
         
         for(int i=idx; i< arr.length; i++){
