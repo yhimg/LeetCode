@@ -6,7 +6,7 @@ class Solution {
         while(l<h){
             while(!isVowel(arr[l]) && l<h) l++;
             while(!isVowel(arr[h]) && h>l) h--;
-            //if(l>=h) break;
+            if(l>=h) break;
             char temp = arr[l];
             arr[l] = arr[h];
             arr[h] = temp;
