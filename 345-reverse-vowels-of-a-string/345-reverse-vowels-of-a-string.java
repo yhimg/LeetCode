@@ -4,8 +4,8 @@ class Solution {
         int l = 0, h = arr.length-1;
         
         while(l<h){
-            while(!isVowel(arr[l]) && l<h) l++;
-            while(!isVowel(arr[h]) && h>l) h--;
+            while(l<h && !isVowel(arr[l])) l++;
+            while(l<h && !isVowel(arr[h])) h--;
             if(l>=h) break;
             char temp = arr[l];
             arr[l] = arr[h];
