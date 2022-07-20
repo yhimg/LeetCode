@@ -9,19 +9,16 @@ class Solution {
     private void solve(int index, int[] arr, List<List<Integer>> result, List<Integer> mid, int target){
         
         if(index >= arr.length){
+            if(target == 0)
+                result.add(new ArrayList(mid));
             return;
         }
         
-        if(target == 0){
-            result.add(new ArrayList(mid));
-            return;
-        }
         
-        if(target>0){
+        
+        if(arr[index] <= target){
             mid.add(arr[index]);
-            target -= arr[index];
-            solve(index, arr, result, mid, target);
-            target += arr[index];
+            solve(index, arr, result, mid, target - arr[index]);
             mid.remove(mid.size() -1);
         }
         
