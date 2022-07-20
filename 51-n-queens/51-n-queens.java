@@ -9,13 +9,17 @@ class Solution {
         //solve(0, n, result);
         
         List<List<String>> result = new ArrayList();
-        solve(0, n, board, result);
+        int[] leftCol = new int[n];
+        int[] lowerDiag = new int[2*(n)-1];
+        int[] upperDiag = new int[2*(n)-1];
+        solve(0, n, board, result, leftCol, lowerDiag, upperDiag);
         
         
         return result;
     }
     
-    private void solve(int col, int n, String[][] board, List<List<String>> result){
+    private void solve(int col, int n, String[][] board, List<List<String>> result,
+                      int[] leftCol, int[] lowerDiag, int[] upperDiag){
         if(col >= n){
             
             List<String> mid = new ArrayList();
@@ -34,10 +38,17 @@ class Solution {
         }
         
         for(int row = 0; row < n; row++){
-            if(validPlace(row, col, board, n)){
+            //if(validPlace(row, col, board, n)){
+            if(leftCol[row] == 0 && lowerDiag[row+col] == 0 && upperDiag[n-1+col-row] == 0){
                 board[row][col] = "Q";
-                solve(col+1, n, board, result);
+                leftCol[row] = 1;
+                lowerDiag[row+col] = 1;
+                upperDiag[n-1+col-row] = 1;
+                solve(col+1, n, board, result, leftCol, lowerDiag, upperDiag);
                 board[row][col] = ".";
+                leftCol[row] = 0;
+                lowerDiag[row+col] = 0;
+                upperDiag[n-1+col-row] = 0;
             }
         }
     }
