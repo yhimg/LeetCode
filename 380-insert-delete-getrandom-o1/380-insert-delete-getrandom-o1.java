@@ -1,8 +1,8 @@
 class RandomizedSet {
 
-    List<Integer> randomSet;
+    Set<Integer> randomSet;
     public RandomizedSet() {
-        randomSet = new ArrayList<Integer>();
+        randomSet = new HashSet<Integer>();
     }
     
     public boolean insert(int val) {
@@ -20,8 +20,13 @@ class RandomizedSet {
     }
     
     public int getRandom() {
-        Random rand = new Random();
-        return randomSet.get(rand.nextInt(randomSet.size()));
+         
+        int index = new Random().nextInt(randomSet.size());
+        Iterator<Integer> iter = randomSet.iterator();
+        for (int i = 0; i < index; i++) {
+            iter.next();
+        }
+        return iter.next();
     }
 }
 
