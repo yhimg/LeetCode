@@ -1,23 +1,30 @@
 class Solution {
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
         List<List<Integer>> result = new ArrayList();
-        subSeq(0, candidates, target, new ArrayList(), result);
+        solve(0, candidates, result, new ArrayList(), target);
         return result;
     }
     
-    private void subSeq(int index, int[] arr, int target, List<Integer> mid, List<List<Integer>> result){
+    
+    private void solve(int index, int[] arr, List<List<Integer>> result, List<Integer> mid, int target){
+        
         if(index >= arr.length){
-            if(target == 0){
-                result.add(new ArrayList(mid));
-             }
             return;
         }
         
-        if(arr[index] <= target){
-            mid.add(arr[index]);
-            subSeq(index, arr, target-arr[index], mid, result);
-            mid.remove(mid.size()-1);
+        if(target == 0){
+            result.add(new ArrayList(mid));
+            return;
         }
-        subSeq(index+1, arr, target, mid, result);        
+        
+        if(target>0){
+            mid.add(arr[index]);
+            target -= arr[index];
+            solve(index, arr, result, mid, target);
+            target += arr[index];
+            mid.remove(mid.size() -1);
+        }
+        
+        solve(index+1, arr, result, mid, target);
     }
 }
