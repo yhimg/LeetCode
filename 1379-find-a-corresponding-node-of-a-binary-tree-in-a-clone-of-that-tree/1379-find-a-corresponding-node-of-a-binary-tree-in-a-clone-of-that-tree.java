@@ -17,7 +17,7 @@ class Solution {
         return solve(root, target.val);
     }
     
-    private TreeNode solve(TreeNode root, int val){
+    /*private TreeNode solve(TreeNode root, int val){
         TreeNode result = null;
         if(root == null) return null;
         Queue<TreeNode> q = new LinkedList();
@@ -37,18 +37,14 @@ class Solution {
             if(result != null) break;
         }
         return result;
-    }
-    
-    /*private void solve(TreeNode root, int val, TreeNode temp){
-        if(root == null) return;
-        if(root.val == val){
-            temp = new TreeNode(val);
-            temp.left = root.left;
-            temp.right = root.right;
-            return;
-        } 
-        
-        solve(root.left, val, temp);
-        solve(root.right, val, temp);
     }*/
+    
+    private TreeNode solve(TreeNode root, int val){
+        if(root == null) return null;
+        if(root.val == val) return root;
+        TreeNode node = solve(root.left, val);
+        if(node != null) return node;
+        node = solve(root.right, val);
+        return node;
+    }
 }
