@@ -8,13 +8,13 @@ class Solution {
                 map.remove(nums[i]);
                 nums[i] = -1;
                 ans[0]++;
+                ans[1]--;
             } else{
                 map.put(nums[i], i);
+                ans[1]++;
             }
         }
-        for(int i=0; i<nums.length; i++){
-            if(nums[i] != -1) ans[1]++;
-        }
+        
         return ans;
     }
 }
