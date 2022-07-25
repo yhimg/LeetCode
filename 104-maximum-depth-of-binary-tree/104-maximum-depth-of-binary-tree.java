@@ -15,7 +15,7 @@
  */
 class Solution {
     public int maxDepth(TreeNode root) {
-        System.out.println(solve(root));
+        //System.out.println(solve(root));
         return solve(root);
     }
     
