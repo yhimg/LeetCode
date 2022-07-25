@@ -7,10 +7,17 @@ class Solution {
         }
         return 'x';*/
         
-        int[] arr = new int[26];
+        /*int[] arr = new int[26];
         for(char c : s.toCharArray()){
             if(arr[c - 'a'] == 1) return c;
             arr[c-'a'] = 1;
+        }
+        return 'a';*/
+        
+        boolean[] arr = new boolean[26];
+        for(char c : s.toCharArray()){
+            if(arr[c - 'a'] == true) return c;
+            arr[c-'a'] = true;
         }
         return 'a';
     }
