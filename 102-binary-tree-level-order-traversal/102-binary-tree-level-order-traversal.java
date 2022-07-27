@@ -15,45 +15,22 @@
  */
 class Solution {
     public List<List<Integer>> levelOrder(TreeNode root) {
-        /*List<List<Integer>> finalList = new ArrayList<>();
-        if(root == null) return finalList;
-        Queue<TreeNode> queue = new LinkedList<>();
-        queue.add(root);
-        queue.add(null);
-        List<Integer> level = new ArrayList<>();
-        while(!queue.isEmpty()){
-            if(queue.peek() == null){
-                finalList.add(level);
-                queue.poll();
-                if(queue.isEmpty()){
-                    break;
-                }
-                level = new ArrayList<>();
-                queue.add(null);
+        List<List<Integer>> result = new ArrayList();
+        if(root == null) return result;
+        Queue<TreeNode> q = new LinkedList();
+        q.add(root);
+        while(!q.isEmpty()){
+            int size = q.size();
+            TreeNode temp;
+            List<Integer> level = new ArrayList();
+            for(int i=0; i< size; i++){
+                temp = q.remove();
+                level.add(temp.val);
+                if(temp.left != null) q.add(temp.left);
+                if(temp.right != null) q.add(temp.right);
             }
-            TreeNode current = queue.poll();
-            level.add(current.val);
-            if(current.left != null) queue.add(current.left);
-            if(current.right != null) queue.add(current.right);
+            result.add(level);
         }
-        return finalList;*/
-        
-        List<List<Integer>> finalList = new ArrayList<>();
-        if(root == null) return finalList;
-        Queue<TreeNode> queue = new LinkedList<>();
-        queue.add(root);
-        while(!queue.isEmpty()){
-            List<Integer> level = new ArrayList<>();
-            int size = queue.size();
-            for(int i=0; i<size; i++){
-                TreeNode current = queue.poll();
-                level.add(current.val);
-                if(current.left != null) queue.add(current.left);
-                if(current.right != null) queue.add(current.right);   
-            }
-            finalList.add(level);
-        }
-        return finalList;
-        
+        return result;
     }
 }
