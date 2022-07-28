@@ -16,7 +16,8 @@
 class Solution {
     public List<Integer> rightSideView(TreeNode root) {
         List<Integer> result = new ArrayList();
-        solve(root, result, 0);
+        bfs(root, result);
+        //solve(root, result, 0);
         return result;
     }
     
@@ -28,8 +29,25 @@ class Solution {
         } 
         solve(root.right, result, depth+1);
         solve(root.left, result, depth+1);
-            
-        
-
+    }
+    
+    private void bfs(TreeNode root, List<Integer> result){
+        if(root == null) return;
+        Queue<TreeNode> q =new LinkedList();
+        q.add(root);
+        int level = 0;
+        while(!q.isEmpty()){
+            int size = q.size();
+            TreeNode temp = null;
+            for(int i=0; i< size; i++){
+                temp = q.poll();
+                if(level == result.size()){
+                    result.add(temp.val);
+                }
+                if(temp.right != null) q.add(temp.right);
+                if(temp.left != null) q.add(temp.left);
+            }
+            level++;
+        }
     }
 }
