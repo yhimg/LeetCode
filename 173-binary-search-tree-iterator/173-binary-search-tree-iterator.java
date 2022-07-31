@@ -25,23 +25,20 @@ class BSTIterator {
     }
     
     public int next() {
-        if(!stack.isEmpty()){
-            TreeNode top = stack.pop();
-            TreeNode node = top.right;
-            if(node != null){
-                //stack.push(node);
-                while(node != null){
-                    stack.push(node);
-                    node = node.left;
-                }
-            }
-            return top.val;
-        }
-        return -1;
+        TreeNode top = stack.pop();
+        pushAll(top.right);
+        return top.val; 
     }
     
     public boolean hasNext() {
         return !stack.isEmpty();
+    }
+    
+    private void pushAll(TreeNode node){
+        while(node != null){
+            stack.push(node);
+            node = node.left;
+        }
     }
 }
 
