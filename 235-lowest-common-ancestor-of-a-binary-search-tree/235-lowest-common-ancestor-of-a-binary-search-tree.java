@@ -17,7 +17,7 @@ class Solution {
         else if(right == null) return left;
         else return root;*/
         
-        if(root == null || root == p || root == q) return root;
+        /*if(root == null || root == p || root == q) return root;
         TreeNode left = null;
         TreeNode right = null;
         if(root.val < p.val || root.val < q.val)
@@ -26,7 +26,17 @@ class Solution {
             right = lowestCommonAncestor(root.left, p, q);
         if(left == null) return right;
         else if(right == null) return left;
-        else return root;
+        else return root;*/
+        
+        while(root != null){
+            if((root.val < Math.min(q.val, p.val)))
+                root = root.right;
+            else if((root.val > Math.max(q.val, p.val)))
+                root = root.left;
+            else return root;
+        }
+        
+        return null;
         
         
     }
