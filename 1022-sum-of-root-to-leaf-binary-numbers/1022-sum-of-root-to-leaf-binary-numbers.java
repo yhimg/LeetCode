@@ -21,7 +21,7 @@ class Solution {
     private int solve(TreeNode root, int prev){
         int sum = 0;
         if(root == null) return sum;
-        prev = (prev << 1) + root.val;
+        prev = (prev << 1) | root.val;
         if(root.left == null && root.right == null) sum +=prev;
         return sum + solve(root.left, prev) + solve(root.right, prev);
     }
