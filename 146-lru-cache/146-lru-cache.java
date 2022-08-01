@@ -1,87 +1,111 @@
-class LRUCache {
-    
-    static class Node{
-        int key, value;
-        Node next, prev;
-        Node(){
-            key = -1;
-            value = -1;
-            next = null;
-            prev = null;
-        }
-        
-        Node(int key, int value){
-            this.key = key;
-            this.value = value;
-            next = null;
-            prev = null;
-        }
-    }
+public class LRUCache {
 
+class DLinkedNode {
+  int key;
+  int value;
+  DLinkedNode pre;
+  DLinkedNode post;
+}
+
+/**
+ * Always add the new node right after head;
+ */
+private void addNode(DLinkedNode node) {
     
-    int cacheSize;
-    Map<Integer, Node> cache;
-    Node head;
-    Node tail;
-    public LRUCache(int capacity) {
-        cacheSize = capacity;
-        cache = new HashMap();
-        head = new Node();
-        tail = new Node();
-        head.next = tail;
-        tail.prev = head;
+  node.pre = head;
+  node.post = head.post;
+
+  head.post.pre = node;
+  head.post = node;
+}
+
+/**
+ * Remove an existing node from the linked list.
+ */
+private void removeNode(DLinkedNode node){
+  DLinkedNode pre = node.pre;
+  DLinkedNode post = node.post;
+
+  pre.post = post;
+  post.pre = pre;
+}
+
+/**
+ * Move certain node in between to the head.
+ */
+private void moveToHead(DLinkedNode node){
+  this.removeNode(node);
+  this.addNode(node);
+}
+
+// pop the current tail. 
+private DLinkedNode popTail(){
+  DLinkedNode res = tail.pre;
+  this.removeNode(res);
+  return res;
+}
+
+private Map<Integer, DLinkedNode> 
+  cache = new HashMap<Integer, DLinkedNode>();
+private int count;
+private int capacity;
+private DLinkedNode head, tail;
+
+public LRUCache(int capacity) {
+  this.count = 0;
+  this.capacity = capacity;
+
+  head = new DLinkedNode();
+  head.pre = null;
+
+  tail = new DLinkedNode();
+  tail.post = null;
+
+  head.post = tail;
+  tail.pre = head;
+}
+
+public int get(int key) {
+
+  DLinkedNode node = cache.get(key);
+  if(node == null){
+    return -1; // should raise exception here.
+  }
+
+  // move the accessed node to the head;
+  this.moveToHead(node);
+
+  return node.value;
+}
+
+
+public void put(int key, int value) {
+  DLinkedNode node = cache.get(key);
+
+  if(node == null){
+
+    DLinkedNode newNode = new DLinkedNode();
+    newNode.key = key;
+    newNode.value = value;
+
+    this.cache.put(key, newNode);
+    this.addNode(newNode);
+
+    ++count;
+
+    if(count > capacity){
+      // pop the tail
+      DLinkedNode tail = this.popTail();
+      this.cache.remove(tail.key);
+      --count;
     }
-    
-    public int get(int key) {
-        if(cache.containsKey(key)){
-            Node temp = cache.get(key);
-            temp.prev.next = temp.next;
-            temp.next.prev = temp.prev;
-            pushAtBegin(temp);
-            cache.put(key, temp);
-            return temp.value;
-        }
-        return -1;
-    }
-    
-    public void put(int key, int value) {
-        if(cache.containsKey(key)){
-            Node temp = cache.get(key);
-            temp.prev.next = temp.next;
-            temp.next.prev = temp.prev;
-            temp.value = value;
-            pushAtBegin(temp);
-            cache.put(key, temp);
-        } else {
-            if(cache.size()<cacheSize){
-                Node temp = new Node(key, value);
-                pushAtBegin(temp);
-                cache.put(key, temp);
-            } else{
-                Node delete = deleteFromEnd();
-                cache.remove(delete.key);
-                Node temp = new Node(key, value);
-                pushAtBegin(temp);
-                cache.put(key, temp);
-            }
-        }
-    }
-    
-    private void pushAtBegin(Node temp){
-        temp.next = head.next;
-        head.next = temp;
-        temp.next.prev = temp;
-        temp.prev = head;
-    }
-    
-    private Node deleteFromEnd(){
-        Node delete = tail.prev;
-        tail.prev = tail.prev.prev;
-        tail.prev.next = tail;
-        delete.next = null;
-        delete.prev = null;
-        return delete;
-    }
+  }else{
+    // update the value.
+    node.value = value;
+    this.moveToHead(node);
+  }
+}
+
 }
 
 /**
