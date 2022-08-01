@@ -37,7 +37,7 @@ class LRUCache {
             Node temp = cache.get(key);
             temp.prev.next = temp.next;
             temp.next.prev = temp.prev;
-            pushAtBegin(head, temp);
+            pushAtBegin(temp);
             cache.put(key, temp);
             return temp.value;
         }
@@ -50,31 +50,31 @@ class LRUCache {
             temp.prev.next = temp.next;
             temp.next.prev = temp.prev;
             temp.value = value;
-            pushAtBegin(head, temp);
+            pushAtBegin(temp);
             cache.put(key, temp);
         } else {
             if(cache.size()<cacheSize){
                 Node temp = new Node(key, value);
-                pushAtBegin(head, temp);
+                pushAtBegin(temp);
                 cache.put(key, temp);
             } else{
-                Node delete = deleteFromEnd(tail);
+                Node delete = deleteFromEnd();
                 cache.remove(delete.key);
                 Node temp = new Node(key, value);
-                pushAtBegin(head, temp);
+                pushAtBegin(temp);
                 cache.put(key, temp);
             }
         }
     }
     
-    private void pushAtBegin(Node head, Node temp){
+    private void pushAtBegin(Node temp){
         temp.next = head.next;
         head.next = temp;
         temp.next.prev = temp;
         temp.prev = head;
     }
     
-    private Node deleteFromEnd(Node tail){
+    private Node deleteFromEnd(){
         Node delete = tail.prev;
         tail.prev = tail.prev.prev;
         tail.prev.next = tail;
