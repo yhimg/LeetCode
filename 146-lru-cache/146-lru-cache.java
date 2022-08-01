@@ -37,10 +37,7 @@ class LRUCache {
             Node temp = cache.get(key);
             temp.prev.next = temp.next;
             temp.next.prev = temp.prev;
-            temp.next = head.next;
-            head.next = temp;
-            temp.next.prev = temp;
-            temp.prev = head;
+            pushAtBegin(head, temp);
             cache.put(key, temp);
             return temp.value;
         }
@@ -53,34 +50,37 @@ class LRUCache {
             temp.prev.next = temp.next;
             temp.next.prev = temp.prev;
             temp.value = value;
-            temp.next = head.next;
-            head.next = temp;
-            temp.next.prev = temp;
-            temp.prev = head;
+            pushAtBegin(head, temp);
             cache.put(key, temp);
         } else {
             if(cache.size()<cacheSize){
                 Node temp = new Node(key, value);
-                temp.next = head.next;
-                head.next = temp;
-                temp.next.prev = temp;
-                temp.prev = head;
+                pushAtBegin(head, temp);
                 cache.put(key, temp);
             } else{
-                Node delete = tail.prev;
-                tail.prev = tail.prev.prev;
-                tail.prev.next = tail;
-                delete.next = null;
-                delete.prev = null;
+                Node delete = deleteFromEnd(tail);
                 cache.remove(delete.key);
                 Node temp = new Node(key, value);
-                temp.next = head.next;
-                head.next = temp;
-                temp.next.prev = temp;
-                temp.prev = head;
+                pushAtBegin(head, temp);
                 cache.put(key, temp);
             }
         }
+    }
+    
+    private void pushAtBegin(Node head, Node temp){
+        temp.next = head.next;
+        head.next = temp;
+        temp.next.prev = temp;
+        temp.prev = head;
+    }
+    
+    private Node deleteFromEnd(Node tail){
+        Node delete = tail.prev;
+        tail.prev = tail.prev.prev;
+        tail.prev.next = tail;
+        delete.next = null;
+        delete.prev = null;
+        return delete;
     }
 }
 
