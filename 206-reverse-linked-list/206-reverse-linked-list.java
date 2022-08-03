@@ -11,7 +11,7 @@
 class Solution {
     public ListNode reverseList(ListNode head) {
         ListNode prev = null;
-        ListNode curr = head;
+        /*ListNode curr = head;
         while(curr != null){
             ListNode next = curr.next;
             curr.next = prev;
@@ -19,14 +19,16 @@ class Solution {
             curr = next;
             //if(curr == null) break;
             //next = next.next;
-        }
-        return prev;
+        }*/
+        return solve(head, prev);
+        //return prev;
     }
     
-    private void solve(ListNode head, ListNode newHead){
-        if(head == null) return;
-        solve(head.next, newHead);
-        newHead = new ListNode(head.val);
-        newHead = newHead.next;
+    private ListNode solve(ListNode head, ListNode prev){
+        if(head == null) return prev;
+        ListNode temp = head.next;
+        head.next = prev;
+        return solve(temp, head);
+        
     }
 }
