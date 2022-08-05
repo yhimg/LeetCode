@@ -12,7 +12,7 @@ class Solution {
         int index = -1;
         for(int i=0; i<s.length(); i++){
             char curr = s.charAt(i);
-            if(map.containsKey(curr) && map.get(curr) == 1){
+            if(map.get(curr) == 1){
                 index = i;
                 break;
             }
