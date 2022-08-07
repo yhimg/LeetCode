@@ -1,27 +1,42 @@
 class Solution {
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        //Arrays.sort(candidates);
         List<List<Integer>> result = new ArrayList();
-        solve(0, candidates, result, new ArrayList(), target);
+        solve(candidates, 0, result, target, new ArrayList());
         return result;
     }
     
-    
-    private void solve(int index, int[] arr, List<List<Integer>> result, List<Integer> mid, int target){
-        
-        if(index >= arr.length){
-            if(target == 0)
-                result.add(new ArrayList(mid));
-            return;
+    private void solve(int[] candiidates, int index, List<List<Integer>> result, int target, List<Integer> mid){
+        if(target < 0 || index >= candiidates.length) return;
+        else if(target == 0){
+            result.add(new ArrayList(mid));
+        }else{
+            if(candiidates[index] <= target){
+                mid.add(candiidates[index]);
+                solve(candiidates, index, result, target-candiidates[index], mid);
+                mid.remove(mid.size()-1);
+            }
+            solve(candiidates, index+1, result, target, mid);
         }
         
-        
-        
-        if(arr[index] <= target){
-            mid.add(arr[index]);
-            solve(index, arr, result, mid, target - arr[index]);
-            mid.remove(mid.size() -1);
-        }
-        
-        solve(index+1, arr, result, mid, target);
     }
+    
+    
+    /*private void solve(int[] candiidates, int index, List<List<Integer>> result, int target, List<Integer> mid){
+        if(target < 0) return;
+        else if(target == 0){
+            result.add(new ArrayList(mid));
+        }else{
+            for(int i = index; i<candiidates.length; i++){
+                if(candiidates[i] <= target){
+                    mid.add(candiidates[i]);
+                    solve(candiidates, i, result, target-candiidates[i], mid);
+                    mid.remove(mid.size()-1);
+                }
+
+            }
+        }
+        
+    }*/
+    
 }
