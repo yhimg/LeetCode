@@ -7,20 +7,13 @@ class Solution {
             }
         }
         List<List<String>> result = new ArrayList();
-        solve(0, n, board, result);
+        solve(0, 0, n, board, result);
         return result;
     }
     
-    private void solve(int col, int n, String[][] board, List<List<String>> result){
-        if(col < n){
-            for(int i = 0; i<n; i++){
-                if(isValidPos(i, col, n, board)){
-                    board[i][col] = "Q";
-                    solve(col+1, n, board, result);
-                    board[i][col] = ".";
-                }
-            }
-        } else{
+    private void solve(int row, int col, int n, String[][] board, List<List<String>> result){
+        if(row >= n) return;
+        if(col >= n){
             List<String> mid = new ArrayList();
             for(int i = 0; i<n; i++){
                 StringBuilder sb = new StringBuilder();
@@ -32,6 +25,13 @@ class Solution {
             }
             result.add(mid);
             return;
+        } else {
+            if(isValidPos(row, col, n, board)){
+                board[row][col] = "Q";
+                solve(0, col+1, n, board, result);
+                board[row][col] = ".";
+            }
+            solve(row+1, col, n, board, result);
         }
     }
     
