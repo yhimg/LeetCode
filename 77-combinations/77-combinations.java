@@ -11,7 +11,7 @@ class Solution {
             result.add(new ArrayList(mid));
             return;
         }
-        for(int i = index; i<=n; i++){
+        for(int i = index; i<=n - (k - mid.size()) +1 ; i++){
             mid.add(i);
             solve(i+1, n, k, result, mid);
             mid.remove(mid.size()-1);
