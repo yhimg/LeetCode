@@ -1,12 +1,12 @@
 class Solution {
     public List<List<Integer>> combinationSum2(int[] candidates, int target) {
         Arrays.sort(candidates);
-        Set<List<Integer>> result = new HashSet();
+        List<List<Integer>> result = new ArrayList();
         solve(0, candidates, result, new ArrayList(), target, 0);
-        return new ArrayList(result);
+        return result;
     }
     
-    private void solve(int index, int[] arr, Set<List<Integer>> result, List<Integer> mid, int sum, int currSum){
+    private void solve(int index, int[] arr, List<List<Integer>> result, List<Integer> mid, int sum, int currSum){
         if(currSum == sum){
             result.add(new ArrayList(mid));
             return;
