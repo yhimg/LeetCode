@@ -28,6 +28,7 @@ class Solution {
             result.add(new ArrayList(mid));
         }else{
             for(int i = index; i<candiidates.length; i++){
+                if(i > 0 && candiidates[i] == candiidates[i-1]) continue;
                 if(candiidates[i] <= target){
                     mid.add(candiidates[i]);
                     solve(candiidates, i, result, target-candiidates[i], mid);
