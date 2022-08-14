@@ -28,11 +28,13 @@ class Solution {
         int row = x;
         int col = y;
         for(int j = 0; j<9; j++){
-            if(j!=y && board[row][j] == n) return false;
-            if(j!=x && board[j][col] == n) return false;
+            if(board[row][j] == n) return false;
+            if(board[j][col] == n) return false;
             int newX = x-x%3;
             int newY = y-y%3;
-            if(!isValidInnerPos(board, newX, newY, n)) return false;
+            //System.out.println("row: "+ row +", j: " + j +", col: "+ col);
+            if(board[3*(row/3) + j/3][3*(col/3) + j%3] == n) return false;
+            //if(!isValidInnerPos(board, newX, newY, n)) return false;
         }
         
         return true;
