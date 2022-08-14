@@ -28,8 +28,8 @@ class Solution {
         int row = x;
         int col = y;
         for(int j = 0; j<9; j++){
-            if(board[row][j] == n) return false;
-            if(board[j][col] == n) return false;
+            if(j!=y && board[row][j] == n) return false;
+            if(j!=x && board[j][col] == n) return false;
             int newX = x-x%3;
             int newY = y-y%3;
             if(!isValidInnerPos(board, newX, newY, n)) return false;
