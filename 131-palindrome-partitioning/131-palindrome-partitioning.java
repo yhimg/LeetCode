@@ -1,11 +1,12 @@
 class Solution {
     public List<List<String>> partition(String s) {
         List<List<String>> result = new ArrayList();
-        solve(s, result, new ArrayList());
+        //solve(s, result, new ArrayList());
+        solve(s, 0, result, new ArrayList());
         return result;
     }
     
-    private void solve(String s, List<List<String>> result, List<String> mid){
+    /*private void solve(String s, List<List<String>> result, List<String> mid){
         if(0 == s.length()){
             result.add(new ArrayList(mid));
             return;
@@ -22,7 +23,26 @@ class Solution {
             } 
         }
         
+    }*/
+    
+    private void solve(String s, int index, List<List<String>> result, List<String> mid){
+        if(index == s.length()){
+            result.add(new ArrayList(mid));
+            return;
+        }
+        
+        for(int i = index; i<s.length(); i++){
+           String temp = s.substring(index, i+1);
+            if(isPalindrome(temp)){
+                mid.add(temp);
+                solve(s, i+1, result, mid);
+                mid.remove(mid.size()-1);  
+                temp = temp.substring(0, temp.length()-1);
+            } 
+        }
+        
     }
+    
     
     private boolean isPalindrome(String s){
         if(s.length() == 1) return true;
