@@ -14,9 +14,9 @@ class Solution {
         }
         
         String map = mapping[digits.charAt(index) - '0'];
-        for(int i = 0; i< map.length(); i++){
+        for(char c: map.toCharArray()){
             
-            solve(index+1, digits, result, sb+map.charAt(i));
+            solve(index+1, digits, result, sb+c);
         }
     }
     
