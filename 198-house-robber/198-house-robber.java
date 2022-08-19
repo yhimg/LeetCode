@@ -3,9 +3,9 @@ class Solution {
         //Map<Integer, Integer> map = new HashMap();
         //return solve(nums.length-1, nums, map);
         int len = nums.length;
-        int dp[] = new int[len];
+        //int dp[] = new int[len];
         //Arrays.fill(nums, -1);
-        dp[0] = nums[0];
+        //dp[0] = nums[0];
         int prev = nums[0];
         int prev2 = 0;
         for(int i = 1; i<len;i++){
