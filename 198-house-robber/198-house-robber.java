@@ -1,7 +1,19 @@
 class Solution {
     public int rob(int[] nums) {
-        Map<Integer, Integer> map = new HashMap();
-        return solve(nums.length-1, nums, map);
+        //Map<Integer, Integer> map = new HashMap();
+        //return solve(nums.length-1, nums, map);
+        int len = nums.length;
+        int dp[] = new int[len];
+        //Arrays.fill(nums, -1);
+        dp[0] = nums[0];
+        for(int i = 1; i<len; i++){
+            int pick = nums[i];
+            if(i > 1) pick += dp[i-2];
+            int notPick = 0 + dp[i-1];
+            dp[i] = Math.max(pick, notPick);
+        }
+        return dp[len-1];
+        
     }
     
     private int solve(int index, int nums[], Map<Integer, Integer> map){
