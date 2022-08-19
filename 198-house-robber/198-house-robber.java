@@ -6,13 +6,25 @@ class Solution {
         int dp[] = new int[len];
         //Arrays.fill(nums, -1);
         dp[0] = nums[0];
-        for(int i = 1; i<len; i++){
+        int prev = nums[0];
+        int prev2 = 0;
+        for(int i = 1; i<len;i++){
+            int pick = nums[i];
+            if(i > 1) pick += prev2;
+            int notPick = 0 + prev;
+            int temp = Math.max(pick, notPick);
+            prev2 = prev;
+            prev = temp;
+        }
+        return prev;
+        
+        /*for(int i = 1; i<len; i++){
             int pick = nums[i];
             if(i > 1) pick += dp[i-2];
             int notPick = 0 + dp[i-1];
             dp[i] = Math.max(pick, notPick);
         }
-        return dp[len-1];
+        return dp[len-1];*/
         
     }
     
