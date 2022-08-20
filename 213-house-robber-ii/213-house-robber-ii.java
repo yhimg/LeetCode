@@ -12,7 +12,6 @@ class Solution {
             prev2 = prev1;
             prev1 = temp;
         }
-        System.out.println(prev1);
         int prev3 = nums[1];
         int prev4 = 0;
         for(int i = 2; i<len; i++){
@@ -22,7 +21,6 @@ class Solution {
             prev4 = prev3;
             prev3 = temp;
         }
-        System.out.println(prev3);
         return Math.max(prev1, prev3);
     }
 }
