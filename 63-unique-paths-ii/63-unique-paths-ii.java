@@ -8,7 +8,7 @@ class Solution {
         }
         return solve(row-1, col-1, obstacleGrid, dp);*/
         
-        int row = obstacleGrid.length;
+        /*int row = obstacleGrid.length;
         int col = obstacleGrid[0].length;
         int dp[][] = new int[row][col];
         for(int i = 0; i<row; i++){
@@ -20,10 +20,27 @@ class Solution {
                         if(j > 0) dp[i][j] += dp[i][j-1];
                     } 
                 }
-                //System.out.println(dp[i][j]);
             }
         }
-        return dp[row-1][col-1];
+        return dp[row-1][col-1];*/
+        
+        int row = obstacleGrid.length;
+        int col = obstacleGrid[0].length;
+        int[] prev = new int[col];
+        for(int i = 0; i< row; i++){
+            int curr[] = new int[col];
+            for(int j = 0; j<col; j++){
+                if(obstacleGrid[i][j] != 1){
+                    if(i == 0 && j ==0) curr[j] = 1;
+                    else{
+                        curr[j] = prev[j];
+                        if(j > 0) curr[j] += curr[j-1];
+                    }
+                }
+            }
+            prev = curr;
+        }
+        return prev[col-1];
         
     }
     
