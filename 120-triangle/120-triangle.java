@@ -10,7 +10,7 @@ class Solution {
         
         return solve(0, 0, triangle, m, dp);*/
         
-        int m = triangle.size();
+        /*int m = triangle.size();
         
         int[][] dp = new int[m][triangle.get(m-1).size()];
         
@@ -26,7 +26,26 @@ class Solution {
                 }
             }
         }
-        return dp[0][0];
+        return dp[0][0];*/
+        
+        int m = triangle.size();
+        
+        int[] prev = new int[m];
+        
+        for(int i = m-1; i>=0; i--){
+            int[] curr = new int[triangle.get(i).size()];
+            for(int j = triangle.get(i).size()-1; j>= 0 ; j--){
+                if(i == m-1){
+                    curr[j] = triangle.get(i).get(j);
+                } 
+                else{
+                 curr[j] = triangle.get(i).get(j) + Math.min(prev[j], prev[j+1]);
+                }
+            }
+            System.out.println(curr[0] + ", "+ curr[curr.length-1]);
+            prev = curr;
+        }
+        return prev[0];
         
         
     }
