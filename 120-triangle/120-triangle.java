@@ -42,7 +42,7 @@ class Solution {
                  curr[j] = triangle.get(i).get(j) + Math.min(prev[j], prev[j+1]);
                 }
             }
-            System.out.println(curr[0] + ", "+ curr[curr.length-1]);
+            //System.out.println(curr[0] + ", "+ curr[curr.length-1]);
             prev = curr;
         }
         return prev[0];
