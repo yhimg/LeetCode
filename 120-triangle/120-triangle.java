@@ -31,7 +31,7 @@ class Solution {
         
     }
     
-    private int solve(int i, int j, List<List<Integer>> triangle, int m, int[][] dp){
+    /*private int solve(int i, int j, List<List<Integer>> triangle, int m, int[][] dp){
         if(i == m-1 && triangle.get(i).size()-1 <= i)
             return triangle.get(i).get(j);
         
@@ -39,5 +39,5 @@ class Solution {
         
         if(dp[i][j] != -1) return dp[i][j];
         return dp[i][j] = triangle.get(i).get(j) + Math.min(solve(i+1, j, triangle, m, dp), solve(i+1, j+1, triangle, m, dp));
-    }
+    }*/
 }
