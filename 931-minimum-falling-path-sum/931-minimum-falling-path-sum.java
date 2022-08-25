@@ -23,17 +23,14 @@ class Solution {
                     dp[0][j] = matrix[0][j];
                 }
                 else{
-                    int x = Integer.MAX_VALUE;
                     dp[i][j] = matrix[i][j];
                     if(j > 0 && j < n-1 ){
-                        x = Math.min(Math.min(dp[i-1][j-1], dp[i-1][j+1]), dp[i-1][j]);
+                        dp[i][j] += Math.min(Math.min(dp[i-1][j-1], dp[i-1][j+1]), dp[i-1][j]);
                     } else if(j > 0) {
-                        x = Math.min(dp[i-1][j-1], dp[i-1][j]);
+                        dp[i][j] += Math.min(dp[i-1][j-1], dp[i-1][j]);
                     } else if(j < n-1){
-                        x = Math.min(dp[i-1][j], dp[i-1][j+1]);
+                        dp[i][j] += Math.min(dp[i-1][j], dp[i-1][j+1]);
                     }
-                    if(x != Integer.MAX_VALUE)
-                        dp[i][j] += x;
                 }
                 
                 if(i == m-1){
