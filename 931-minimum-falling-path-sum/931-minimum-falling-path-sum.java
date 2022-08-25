@@ -12,7 +12,7 @@ class Solution {
         }
         return min;*/
         
-        int m = matrix.length; 
+        /*int m = matrix.length; 
         int n = matrix[0].length;
         int[][] dp = new int[m][n];
         
@@ -37,6 +37,38 @@ class Solution {
                     min = Math.min(min, dp[i][j]);
                 }
             }
+        }
+        return min;*/
+        
+        
+        int m = matrix.length; 
+        int n = matrix[0].length;
+        int[] prev = new int[n];
+    
+        
+        int min = Integer.MAX_VALUE;
+        for(int i = 0; i < m; i++){
+            int curr[] = new int[n];
+            for(int j = 0; j< n; j++){
+                if(i == 0){
+                    curr[j] = matrix[0][j];
+                }
+                else{
+                    curr[j] = matrix[i][j];
+                    if(j > 0 && j < n-1 ){
+                        curr[j] += Math.min(Math.min(prev[j-1], prev[j+1]), prev[j]);
+                    } else if(j > 0) {
+                        curr[j] += Math.min(prev[j-1], prev[j]);
+                    } else if(j < n-1){
+                        curr[j] += Math.min(prev[j], prev[j+1]);
+                    }
+                }
+                
+                if(i == m-1){
+                    min = Math.min(min, curr[j]);
+                }
+            }
+            prev = curr;
         }
         return min;
     }
