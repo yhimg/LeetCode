@@ -41,15 +41,7 @@ class Solution {
                 }
             }
         }
-        
-        for(int j = 0; j<n; j++){
-            System.out.print(dp[m-1][j] + ", ");
-        }
-        
         return min;
-        
-        
-        
     }
     
     
