@@ -29,7 +29,26 @@ class Solution {
         
         boolean dp[][] = new boolean[n][k+1];
         
-        for(int ind = 0; ind < n; ind++)
+        boolean prev[] = new boolean[k+1];
+        prev[0] = true;
+        prev[k] = k == arr[0];
+        
+        for(int index = 1; index < n; index++){
+            boolean[] curr = new boolean[k+1];
+            curr[0] = true;
+            for(int target = 1; target <= k; target++){
+                boolean notTake = prev[target];
+                boolean take = false;
+                if(arr[index] <= target)
+                    take = prev[target-arr[index]];
+                curr[target] = take || notTake;
+            }
+            prev = curr;
+        }
+        
+        return prev[k];
+        
+        /*for(int ind = 0; ind < n; ind++)
             dp[ind][0] = true;
         
         dp[0][k] = k == arr[0];
@@ -44,7 +63,7 @@ class Solution {
                 dp[ind][target] = take || notTake;
             }
         }
-        return dp[n-1][k];
+        return dp[n-1][k];*/
     
         
     }
