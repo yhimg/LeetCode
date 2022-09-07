@@ -37,13 +37,12 @@ class Solution {
             if(s1.charAt(ind1) == s2.charAt(ind2)) return 1;
         }
         int len = 0;
-        int max = 0;
         if(s1.charAt(ind1) == s2.charAt(ind2)){
-            len = 1 + solve(ind1-1, ind2-1, s1, s2, dp);
+            return dp[ind1][ind2] = 1 + solve(ind1-1, ind2-1, s1, s2, dp);
         } else{
-            len =  Math.max(solve(ind1, ind2-1, s1, s2, dp), solve(ind1-1, ind2, s1, s2, dp));
+            return dp[ind1][ind2]=  Math.max(solve(ind1, ind2-1, s1, s2, dp), solve(ind1-1, ind2, s1, s2, dp));
         }
         
-        return dp[ind1][ind2] = len;
+        //return dp[ind1][ind2] = len;
     }
 }
