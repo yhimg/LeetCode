@@ -9,21 +9,31 @@ class Solution {
         
         /*for(int i = 0; i<len1; i++){
             if(s1.charAt(i) == s2.charAt(0)) return dp[i][0] = 1;
-            if(s1.charAt(0) == s2.charAt(i)) return dp[0][i] = 1;
+            
+        }
+        
+        for(int j = 1; j< len2; j++){
+            if(s1.charAt(0) == s2.charAt(j)) return dp[0][j] = 1;
         }
         
         for(int ind1 = 1; ind1<len1; ind1++){
             for(int ind2 = 1; ind2<len2; ind2++){
                 int len = 0;
-                int max = 0;
                 if(s1.charAt(ind1) == s2.charAt(ind2)){
                     len = 1 + dp[ind1-1][ind2-1];
                 } else{
-                    max = Math.max(dp[ind1-1][ind2], dp[ind1][ind2-1]);
+                    len = Math.max(dp[ind1-1][ind2], dp[ind1][ind2-1]);
                 }
                 
-                dp[ind1][ind2] = len+max;
+                dp[ind1][ind2] = len;
             }
+        }
+        for(int i =0; i<len1; i++){
+            System.out.println("Hello");
+            for(int j = 0; j<len2; j++){
+                System.out.print(dp[i][j] + " ");
+            }
+            System.out.println();
         }
         return dp[len1-1][len2-1];*/
         
