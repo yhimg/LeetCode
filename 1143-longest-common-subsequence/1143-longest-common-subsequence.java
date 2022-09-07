@@ -3,32 +3,29 @@ class Solution {
         int len1 = s1.length();
         int len2 = s2.length();
         int[][] dp = new int[len1+1][len2+1];
-        for(int i = 0; i<len1; i++)
+        /*for(int i = 0; i<len1; i++)
             Arrays.fill(dp[i], -1);
-        return solve(len1, len2, s1, s2, dp);
+        return solve(len1, len2, s1, s2, dp);*/
         
-        /*for(int i = 0; i<len1; i++){
-            
+        for(int i = 0; i<len1; i++){
+            dp[i][0] = 0;
         }
         
-        for(int j = 1; j< len2; j++){
-            if(s1.charAt(0) == s2.charAt(j)) return dp[0][j] = 1;
+        for(int j = 0; j<len2; j++){
+            dp[0][j] = 0;
         }
         
-        for(int ind1 = 1; ind1<len1; ind1++){
-            for(int ind2 = 1; ind2<len2; ind2++){
-                int len = 0;
-                if(s1.charAt(ind1) == s2.charAt(ind2)){
-                    len = 1 + dp[ind1-1][ind2-1];
+        for(int ind1 = 1; ind1<=len1; ind1++){
+            for(int ind2 = 1; ind2<=len2; ind2++){
+                if(s1.charAt(ind1-1) == s2.charAt(ind2-1)){
+                    dp[ind1][ind2] = 1 + dp[ind1-1][ind2-1];
                 } else{
-                    len = Math.max(dp[ind1-1][ind2], dp[ind1][ind2-1]);
+                    dp[ind1][ind2] = Math.max(dp[ind1-1][ind2], dp[ind1][ind2-1]);
                 }
-                
-                dp[ind1][ind2] = len;
             }
         }
         
-        return dp[len1-1][len2-1];*/
+        return dp[len1][len2];
         
     }
     
