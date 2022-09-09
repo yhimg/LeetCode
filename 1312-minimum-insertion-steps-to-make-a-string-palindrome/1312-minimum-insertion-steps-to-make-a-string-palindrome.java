@@ -1,26 +1,23 @@
 class Solution {
-    public int minInsertions(String s1) {
-        String s2 = new StringBuilder(s1).reverse().toString();
-        int n = s1.length();
-        
-        int prev[] = new int[n+1];
-        
-        int len = 0;
-        
-        for(int i = 1; i<=n; i++){
-            int[] curr = new int[n+1];
-            for(int j = 1; j<=n; j++){
-                if(s1.charAt(i-1) == s2.charAt(j-1)){
-                    curr[j] = 1 + prev[j-1];
-                    len = Math.max(len, curr[j]);
-                } else{
-                    curr[j] = Math.max(prev[j], curr[j-1]);
+    public int minInsertions(String s) {
+        int[] len = new int[s.length()];
+        char[] charArr = s.toCharArray();
+        len[0] =1;
+        int maxVal = 1;
+        for(int i=1;i<charArr.length;i++){
+            len[i]=1;
+            int max = 0;
+            for(int j =i-1;j>=0;j--){
+                if(charArr[i] != charArr[j]){
+                    max = Math.max(len[j],max);
+                    continue;
                 }
+                int val = max +2;
+                max = Math.max(len[j],max);
+                maxVal = Math.max(maxVal,val);
+                len[j]=val;
             }
-            prev = curr;
         }
-        
-        return n-len;
-        
+        return s.length() - maxVal;
     }
 }
