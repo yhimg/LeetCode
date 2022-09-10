@@ -1,26 +1,30 @@
 class Solution {
-    public int minDistance(String W1, String W2) {
-        int m = W1.length(), n = W2.length();
-        if (m < n) {
-            String tempStr = W1;
-            W1 = W2;
-            W2 = tempStr;
-            int tempInt = n;
-            n = m;
-            m = tempInt;
+    public int minDistance(String s1, String s2) {
+        int l1 = s1.length();
+        int l2 = s2.length();
+        if (l1 < l2) {
+            String tempStr = s1;
+            s1 = s2;
+            s2 = tempStr;
+            int tempInt = l2;
+            l2 = l1;
+            l1 = tempInt;
         }
-        char[] WA1 = W1.toCharArray(), WA2 = W2.toCharArray();
-        int[] dpLast = new int[n+1], dpCurr = new int[n+1];
-        for (char c1 : WA1) {
-            for (int j = 0; j < n; j++) 
-                dpCurr[j+1] = c1 == WA2[j]
-                    ? dpLast[j] + 1
-                    : Math.max(dpCurr[j], dpLast[j+1]);
-            int[] tempArr = dpLast;
-            dpLast = dpCurr;
-            dpCurr = tempArr;
-        }
-        return m + n - 2 * dpLast[n];
+        int prev[] = new int[l2+1];
         
+        //int lcsLen = 0;
+        for(int i = 1; i<=l1; i++){
+            int[] curr = new int[l2+1];
+            for(int j = 1; j<=l2; j++){
+                if(s1.charAt(i-1) == s2.charAt(j-1)){
+                    curr[j] = 1 + prev[j-1];
+                }
+                else
+                    curr[j] = Math.max(prev[j], curr[j-1]);
+            }
+            prev = curr;
+        }
+        int lcsLen = prev[l2];
+        return (s1.length() - lcsLen) + (s2.length() - lcsLen);
     }
 }
