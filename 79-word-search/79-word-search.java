@@ -1,32 +1,28 @@
 class Solution {
     public boolean exist(char[][] board, String word) {
-        int rows = board.length;
-        int cols = board[0].length;
-        
-        boolean [][] visited = new boolean[rows][cols];
-        for(int i = 0; i<board.length; i++){
-            for(int j = 0; j<board[0].length; j++){
-                if(board[i][j] == word.charAt(0) && solve(i, j, board, visited, word, 0)) return true;
+        boolean[][] visited = new boolean[board.length][board[0].length];
+        boolean isValid = false;
+        for(int i = 0; i < board.length; i++){
+            for(int j=0; j<board[0].length; j++){
+                isValid = solve(i, j, word, board, 0, visited);
+                //System.out.println(isValid);                
+                if(isValid) return true;;
             }
         }
-        
-        return false;
+        return isValid;
     }
     
-    
-    private boolean solve(int row, int col, char[][] board, boolean[][] visited, String word, int index){
-        if(word.length() == index){
-            return true;
-        }
-        if(row == board.length || col == board[0].length || row < 0 || col < 0 || visited[row][col] || board[row][col] != word.charAt(index)){
-            return false;
-        }
+    private boolean solve(int row, int col, String word, char[][] board, int index, boolean[][] visited){
+        //System.out.println(curr);
+        if(index == word.length()) return true;
         
+        if(row<0 || col<0 || row >= board.length || col>= board[0].length || visited[row][col] || board[row][col] != word.charAt(index))
+            return false;
         visited[row][col] = true;
-        boolean result = solve(row, col+1, board, visited, word, index+1) 
-            || solve(row, col-1, board, visited, word, index+1) 
-            || solve(row+1, col, board, visited, word, index+1) 
-            || solve(row-1, col, board, visited, word, index+1);
+        boolean result = solve(row, col+1, word, board, index+1, visited)
+            || solve(row+1, col, word, board, index+1, visited)
+            || solve(row, col-1, word, board, index+1, visited)
+            || solve(row-1, col, word, board, index+1, visited);
         visited[row][col] = false;
         return result;
     }
