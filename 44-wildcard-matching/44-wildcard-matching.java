@@ -19,7 +19,8 @@ class Solution {
           dp[0][j] = false;
         }
         for (int i = 1; i <= n; i++) {
-          dp[i][0] = isAllStars1(S1, i);
+            //if(S1.charAt(i-1) == '*')
+          dp[i][0] = dp[i-1][0] && S1.charAt(i - 1)=='*';
         }
 
         for (int i = 1; i <= n; i++) {
@@ -36,6 +37,13 @@ class Solution {
             }
           }
         }
+        
+        /*for(int  i =0; i<=n; i++){
+            for(int j = 0; j<= m; j++){
+                System.out.print(dp[i][j] +", ");
+            }
+            System.out.println();
+        }*/
 
         return dp[n][m];
     }
