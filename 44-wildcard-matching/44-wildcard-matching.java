@@ -1,14 +1,54 @@
 class Solution {
     public boolean isMatch(String S2, String S1) {
-        int n = S1.length();
-    int m = S2.length();
+        /*int n = S1.length();
+        int m = S2.length();
 
-    int dp[][] = new int[n][m];
-    for (int row[]: dp)
-      Arrays.fill(row, -1);
-    return wildcardMatchingUtil(S1, S2, n - 1, m - 1, dp) == 1 ? true : false;
+        int dp[][] = new int[n][m];
+        for (int row[]: dp)
+          Arrays.fill(row, -1);
+        return wildcardMatchingUtil(S1, S2, n - 1, m - 1, dp) == 1 ? true : false;*/
+        
+        
+        int n = S1.length();
+        int m = S2.length();
+
+        boolean dp[][] = new boolean[n + 1][m + 1];
+        dp[0][0] = true;
+
+        for (int j = 1; j <= m; j++) {
+          dp[0][j] = false;
+        }
+        for (int i = 1; i <= n; i++) {
+          dp[i][0] = isAllStars1(S1, i);
+        }
+
+        for (int i = 1; i <= n; i++) {
+          for (int j = 1; j <= m; j++) {
+
+            if (S1.charAt(i - 1) == S2.charAt(j - 1) || S1.charAt(i - 1) == '?')
+              dp[i][j] = dp[i - 1][j - 1];
+
+            else {
+              if (S1.charAt(i - 1) == '*')
+                dp[i][j] = dp[i - 1][j] || dp[i][j - 1];
+
+              else dp[i][j] = false;
+            }
+          }
+        }
+
+        return dp[n][m];
     }
     
+    boolean isAllStars1(String S1, int i) {
+
+        // S1 is taken in 1-based indexing
+        for (int j = 1; j <= i; j++) {
+          if (S1.charAt(j - 1) != '*')
+            return false;
+        }
+        return true;
+  }
     
     private int wildcardMatchingUtil(String S1, String S2, int i, int j, int[][] dp) {
 
