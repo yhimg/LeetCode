@@ -12,30 +12,32 @@ class Solution {
         int n = S1.length();
         int m = S2.length();
 
-        boolean dp[][] = new boolean[n + 1][m + 1];
-        dp[0][0] = true;
+        boolean prev[] = new boolean[m + 1];
+        prev[0] = true;
 
         for (int j = 1; j <= m; j++) {
-          dp[0][j] = false;
+          prev[j] = false;
         }
-        for (int i = 1; i <= n; i++) {
-            //if(S1.charAt(i-1) == '*')
+        /*for (int i = 1; i <= n; i++) {
           dp[i][0] = dp[i-1][0] && S1.charAt(i - 1)=='*';
-        }
+        }*/
 
         for (int i = 1; i <= n; i++) {
+            boolean curr[] = new boolean[m + 1];
+            curr[0] = prev[0] && S1.charAt(i - 1)=='*';
           for (int j = 1; j <= m; j++) {
 
             if (S1.charAt(i - 1) == S2.charAt(j - 1) || S1.charAt(i - 1) == '?')
-              dp[i][j] = dp[i - 1][j - 1];
+              curr[j] = prev[j - 1];
 
             else {
               if (S1.charAt(i - 1) == '*')
-                dp[i][j] = dp[i - 1][j] || dp[i][j - 1];
+                curr[j] = prev[j] || curr[j - 1];
 
-              else dp[i][j] = false;
+              else curr[j] = false;
             }
           }
+            prev = curr;
         }
         
         /*for(int  i =0; i<=n; i++){
@@ -45,7 +47,7 @@ class Solution {
             System.out.println();
         }*/
 
-        return dp[n][m];
+        return prev[m];
     }
     
     boolean isAllStars1(String S1, int i) {
