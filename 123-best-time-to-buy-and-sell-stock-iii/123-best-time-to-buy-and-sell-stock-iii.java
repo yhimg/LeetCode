@@ -1,22 +1,22 @@
 class Solution {
     public int maxProfit(int[] prices) {
         int n = prices.length;
-        int dp[][] = new int[3][n];
-        for(int i = 0; i<3; i++)
-            dp[i][0] = 0;
+        int prev[] = new int[n];
         for(int j = 0; j<n; j++)
-            dp[0][j] = 0;
+            prev[j] = 0;
         
         
         for(int i = 1; i<=2; i++){
             int max = Integer.MIN_VALUE;
+            int[] curr = new int[n];
             for(int j = 1; j<n; j++){
-                max = Math.max(max, dp[i-1][j-1] - prices[j-1]);
-                dp[i][j] = Math.max(dp[i][j-1], prices[j]+max);
+                max = Math.max(max, prev[j-1] - prices[j-1]);
+                curr[j] = Math.max(curr[j-1], prices[j]+max);
             }
+            prev = curr;
         }
         
-        return dp[2][n-1];
+        return prev[n-1];
         
         
         
