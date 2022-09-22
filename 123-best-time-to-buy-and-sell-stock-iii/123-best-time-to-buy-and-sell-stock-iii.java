@@ -1,6 +1,6 @@
 class Solution {
     public int maxProfit(int[] prices) {
-        int n = prices.length;
+        /*int n = prices.length;
         int prev[] = new int[n];
         for(int j = 0; j<n; j++)
             prev[j] = 0;
@@ -16,7 +16,7 @@ class Solution {
             prev = curr;
         }
         
-        return prev[n-1];
+        return prev[n-1];*/
         
         
         
@@ -53,8 +53,28 @@ class Solution {
         }
         return dp[0][1][2];*/
         
+        int n = prices.length;
+        int dp[][] = new int[n][4];
+        for(int i = 0; i<n; i++)
+            Arrays.fill(dp[i], -1);
+        
+        return solve2(0, 0, prices, dp);
+        
         
     }
+    
+    private int solve2(int i, int tran, int[] prices, int[][] dp){
+        if(i == prices.length || tran == 4) return 0;
+        if(dp[i][tran] != -1) return dp[i][tran];
+        if(tran % 2 == 0){ // buy
+            return dp[i][tran] = Math.max(-prices[i] + solve2(i+1, tran+1, prices, dp), solve2(i+1, tran, prices, dp));
+        } else {
+            return dp[i][tran] = Math.max(prices[i] + solve2(i+1, tran+1, prices, dp), solve2(i+1, tran, prices, dp));
+        }
+        
+    }
+    
+    
     
     private int solve(int i, int[] arr, int count, int buy, int[][][] dp){
         
