@@ -21,6 +21,7 @@ class Solution {
         
         int n = arr.length;
         int[] dp = new int[n];
+        int max = 1;
         Arrays.fill(dp, 1);
         for(int i = 0; i<=n-1; i++){
             for(int prev_i = 0; prev_i<i; prev_i++){
@@ -28,10 +29,10 @@ class Solution {
                     dp[i] = Math.max(1+dp[prev_i], dp[i]);
                 }
             }
+            max = Math.max(max, dp[i]);
         }
         
-        Arrays.sort(dp);
-        return dp[n-1];
+       return max;
         
         
         
