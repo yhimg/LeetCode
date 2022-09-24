@@ -21,17 +21,34 @@ class Solution {
         
         int n = arr.length;
         int[] dp = new int[n];
+        int hash[] = new int[n];
+        for(int i = 0; i<n; i++){
+            hash[i] = i;
+        }
         int max = 1;
+        int max_i = 0;
         Arrays.fill(dp, 1);
         for(int i = 0; i<=n-1; i++){
             for(int prev_i = 0; prev_i<i; prev_i++){
                 if(arr[prev_i] < arr[i]){
-                    dp[i] = Math.max(1+dp[prev_i], dp[i]);
+                    
+                    if(1+dp[prev_i] > dp[i]){
+                        dp[i] = 1+dp[prev_i];
+                        hash[i] = prev_i;
+                    }
                 }
             }
-            max = Math.max(max, dp[i]);
+            if(dp[i] > max){
+                max = dp[i];
+                max_i = i;
+            }
+            
         }
-        
+        while(max_i != hash[max_i]){
+            System.out.print(arr[max_i] + ", ");
+            max_i = hash[max_i];
+        }
+        System.out.print(arr[max_i] + ", ");
        return max;
         
         
