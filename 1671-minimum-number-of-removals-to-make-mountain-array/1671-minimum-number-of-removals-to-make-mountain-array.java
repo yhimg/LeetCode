@@ -25,10 +25,10 @@ class Solution {
             if(dpDec[i] > 1 && dpInc[i] > 1)
                 maxLen = Math.max(maxLen, dpInc[i]+dpDec[i] - 1);
         }
-        for(int x : dpInc) System.out.print(x + ", ");
-        System.out.println();
-        for(int x : dpDec) System.out.print(x + ", ");
-        System.out.println("\n" + maxLen + "--");
+        // for(int x : dpInc) System.out.print(x + ", ");
+        // System.out.println();
+        // for(int x : dpDec) System.out.print(x + ", ");
+        // System.out.println("\n" + maxLen + "--");
         return n-maxLen;
     }
 }
