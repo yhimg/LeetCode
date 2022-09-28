@@ -13,8 +13,6 @@ class Solution {
             }
             max = Math.max(dp[i], max);
         }
-        //for(String x : arr) System.out.print(x+ ", ");
-        //System.out.println();
         for(int x : dp) System.out.print(x+ ", ");
         return max;
     }
@@ -30,21 +28,9 @@ class Solution {
             }else{
                 i++;
             }
-            // i++;
-            // j++;
-            // if(skip > 1) return false;
         }
-        // while(i < curr.length()){
-        //     skip++;
-        //     i++;
-        // }
-        // if(j < prev.length()){ 
-        //     skip++;
-        //     j++;
-        // }
         if(i == curr.length() && j == prev.length()) return true;
         return false;
-        //return skip == 1;
     }
     
     
