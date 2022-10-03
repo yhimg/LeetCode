@@ -12,7 +12,8 @@ class Solution {
                     // visited[i][j] = 1;
                     count++;
                     //bfs(visited, grid, m, n, queue);
-                    dfs(i, j, visited, grid, m, n);
+                    //dfs1(i, j, visited, grid, m, n);
+                    dfs2(i, j, grid);
                 }
             }
         }
@@ -25,14 +26,24 @@ class Solution {
         return count;
     }
     
-    private void dfs(int i, int j, int[][] visited, char[][] grid, int m, int n){
+    private void dfs1(int i, int j, int[][] visited, char[][] grid, int m, int n){
         if(i < 0 || j < 0 || i == m || j == n || grid[i][j] != '1' || visited[i][j] == 1)
             return;
         visited[i][j] = 1;
-        dfs(i, j+1, visited, grid, m, n);
-        dfs(i+1, j, visited, grid, m, n);
-        dfs(i, j-1, visited, grid, m, n);
-        dfs(i-1, j, visited, grid, m, n);
+        dfs1(i, j+1, visited, grid, m, n);
+        dfs1(i+1, j, visited, grid, m, n);
+        dfs1(i, j-1, visited, grid, m, n);
+        dfs1(i-1, j, visited, grid, m, n);
+    }
+    
+    private void dfs2(int i, int j, char[][] grid){
+        if(i < 0 || j < 0 || i == grid.length || j == grid[0].length || grid[i][j] != '1')
+            return;
+        grid[i][j] = 0;
+        dfs2(i, j+1, grid);
+        dfs2(i+1, j, grid);
+        dfs2(i, j-1, grid);
+        dfs2(i-1, j, grid);
     }
     
     private void bfs(int[][] visited, char[][] grid, int m, int n, ArrayDeque<int[]> queue){
