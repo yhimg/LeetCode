@@ -8,10 +8,11 @@ class Solution {
         for(int i = 0; i<m; i++){
             for(int j = 0; j<n; j++){
                 if(grid[i][j] == '1' && visited[i][j] != 1){
-                    queue.add(new int[]{i, j});
-                    visited[i][j] = 1;
+                    // queue.add(new int[]{i, j});
+                    // visited[i][j] = 1;
                     count++;
-                    bfs(visited, grid, m, n, queue);
+                    //bfs(visited, grid, m, n, queue);
+                    dfs(i, j, visited, grid, m, n);
                 }
             }
         }
@@ -22,6 +23,16 @@ class Solution {
         //     System.out.println();
         // }
         return count;
+    }
+    
+    private void dfs(int i, int j, int[][] visited, char[][] grid, int m, int n){
+        if(i < 0 || j < 0 || i == m || j == n || grid[i][j] != '1' || visited[i][j] == 1)
+            return;
+        visited[i][j] = 1;
+        dfs(i, j+1, visited, grid, m, n);
+        dfs(i+1, j, visited, grid, m, n);
+        dfs(i, j-1, visited, grid, m, n);
+        dfs(i-1, j, visited, grid, m, n);
     }
     
     private void bfs(int[][] visited, char[][] grid, int m, int n, ArrayDeque<int[]> queue){
