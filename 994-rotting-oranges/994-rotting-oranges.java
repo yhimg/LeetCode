@@ -16,6 +16,7 @@ class Solution {
                 }
             }
         }
+        if(fresh == 0) return 0;
         count = bfs(grid, q, visited);
         int total = 0;
         for(int i = 0; i<m; i++){
