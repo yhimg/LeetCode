@@ -14,25 +14,30 @@ class Solution {
         //     }
         // }
         
-        while(j<len){
-            if(nums[j] != 0){
-                if(j > i){
-                    nums[i] = nums[j];
-                    nums[j] = 0;
-                }
-                i++;
-            }
-            j++;
-        }
-        
-        
-        // while(j < len){
+        // while(j<len){
         //     if(nums[j] != 0){
-        //         nums[i] = nums[j];
+        //         if(j > i){
+        //             nums[i] = nums[j];
+        //             nums[j] = 0;
+        //         }
         //         i++;
         //     }
         //     j++;
         // }
+        
+        
+        while(j < len){
+            if(nums[j] != 0){
+                if(nums[i] == 0){
+                    nums[i] = nums[j];
+                    nums[j] = 0;
+                    //i++;
+                }
+            }
+            if(nums[i] != 0) i++;
+            
+            j++;
+        }
         // while(i < len){
         //     nums[i] = 0;
         //     i++;
