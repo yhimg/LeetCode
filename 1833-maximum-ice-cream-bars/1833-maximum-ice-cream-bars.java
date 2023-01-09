@@ -3,10 +3,18 @@ class Solution {
     public int maxIceCream(int[] costs, int coins) {
         int n = costs.length;
         Arrays.sort(costs);
+
+        for(int i = 0; i<n; i++){
+            if(costs[i] <= coins){
+                count++;
+                coins-=costs[i];
+            }
+        }
+        return count;
         
-        int dp[] = new int[n];
-        Arrays.fill(dp, -1);
-        return solve(0, costs, coins, dp);
+        // int dp[] = new int[n];
+        // Arrays.fill(dp, -1);
+        // return solve(0, costs, coins, dp);
     
         
     }
